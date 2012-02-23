@@ -1,23 +1,24 @@
 <html>
   <head>
-    <title>OpenLayers Demo</title>
-    <style type="text/css">
-      html, body, #basicMap {
-          width: 100%;
-          height: 100%;
-          margin: 0;
-      }
-      #left,
-      #right {
-		  width:49%;
-		}
-      #left {
-		  float: left;
-		  border-right: 1px solid blue;
-		 }
-    </style>
+    <title>comparearea</title>
     <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <link rel="stylesheet" href="comparearea.css" />
+    <script src="comparearea.js"></script>
     <script>
+    // adapted from http://tools.geofabrik.de/mc/mc.js
+
+
+var markersLayer = new Array();
+var marker = new Array();
+
+var moving = false;
+var movestarted = false;
+
+var startCenter = new Array();
+var touchdown = new Array();
+
+
+
       function init() {
         mapleft = new OpenLayers.Map("left");
         var mapnik = new OpenLayers.Layer.OSM();
@@ -38,7 +39,61 @@
             new OpenLayers.Projection("EPSG:900913") // to Spherical Mercator Projection
           ), 15 // Zoom level
         );
+        mapleft.events.register('movestart', 0, moveStart);
+        mapleft.events.register('moveend',   0, moveEnd);
+        mapleft.events.register('mousemove', 0, mouseMove); // geofabrik
+        initMarker(1); // geofabrik
       }
+    
+    // geofabrik // geofabrik // geofabrik
+    function mouseMove(evt) {
+    markerright.moveTo(mapright.getLayerPxFromViewPortPx(evt.xy));
+    return(false);
+    }
+
+
+    function moveStart() {
+    movestarted = true;
+    startCenter['lon'] = mapleft.getCenter().lon;
+    startCenter['lat'] = mapleft.getCenter().lat;
+    return(false);
+    }
+
+
+
+
+
+    function moveEnd() {
+        if (moving) {
+            return;
+        }
+        moving = true;
+
+        touchdown['lon'] = mapleft.getCenter().lon - startCenter['lon'] + mapright.getCenter().lon,
+        touchdown['lat'] = mapleft.getCenter().lat - startCenter['lat'] + mapright.getCenter().lat
+        
+        mapright.setCenter(
+            new OpenLayers.LonLat(touchdown['lon'],touchdown['lat']) // Center of the map
+          , mapleft.getZoom()
+        );
+  
+        moving = false;
+        //updatePermalink();
+        movestarted = false;
+        return(false);
+    }
+
+    function initMarker(n) { 
+        markersLayer = new OpenLayers.Layer.Markers("Marker");
+        mapright.addLayer(markersLayer);
+        markerright = new OpenLayers.Marker(mapright.getCenter(),
+            new OpenLayers.Icon('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAAZiS0dEAMQAxADE73nNUQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9kBHBEbBoP7gTgAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAdUlEQVQ4y81UQQ7AIAijy/7/5e6wuBBGUBSz9WpTSy2CpDQAEAtqws2BOnvxDxkAAPcyD0OCGSwJeq7LHZ6rAtbl3gy9GqQds0LFZhh1jORTZpLsccsz3DIyojroMfX46U2ZNR5mOCP6r8+hZJd7MXzjMPM4FyigMiYeY2efAAAAAElFTkSuQmCC', new OpenLayers.Size(20, 20), new OpenLayers.Pixel(-10, -10))
+        );
+        markersLayer.addMarker(markerright);
+    }
+
+
+
     </script>
   </head>
   <body onload="init();">
