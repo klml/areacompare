@@ -1,7 +1,6 @@
 // TODO read get
 // TODO inputs
 // TODO auf sync reezoom
-
 // adapted from http://tools.geofabrik.de/mc/mc.js
 
 var start0 = new Array( '11.575278','48.137222' );
