@@ -1,0 +1,35 @@
+html, body, #basicMap {
+width: 99.9%;
+height: 99.9%;
+margin: 0;
+}
+#map0,
+#map1 {
+width: 50%;
+min-height: 100px;
+}
+#map0 {
+float: left;
+border-right: 1px solid #8da7cc;
+}
+#map1 {
+margin: 0 0 0 50% !important;
+}
+#control {
+position: absolute;
+z-index: 999;
+height:0px;
+width: 350px;
+bottom:0;
+margin: 0 auto;
+background-color: #fff;
+border: 5px solid #8da7cc;
+border-bottom: 0;
+overflow: hidden;
+}
+#control:hover {
+height:30px;
+}
+#control input[type="text"]{
+width: 60px;
+}
