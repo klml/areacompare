@@ -75,6 +75,9 @@ jQuery('button#sync').click( function() {
     jQuery(this).html(oldsync)
     jQuery('#map1 #OpenLayers.Control.PanZoom_125.olControlPanZoom').toggle();
     jQuery('#map-decoration').toggle();
+    initMarker(0);
+    initMarker(1);
+    updatePermalink();
 });
 
 // geofabrik // geofabrik // geofabrik
@@ -107,7 +110,7 @@ function moveEnd() {
 }
 
 function mouseMove(evt) {
-    marker[1-this].moveTo(maps[this].getLayerPxFromViewPortPx(evt.xy));
+    marker[1-this].moveTo(maps[this].getLayerPxFromViewPortPx(evt.xy)); 
     return(false);
 }
 
