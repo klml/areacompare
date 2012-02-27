@@ -5,6 +5,7 @@ Adapted from [Map Compare](http://tools.geofabrik.de/mc/)
 
 You can use the normal OSM controls. The 'desync' button, on the left bottom corner is to change one map seperatly.
 
+ATM no support for IE;(
 
 ## Links
 
