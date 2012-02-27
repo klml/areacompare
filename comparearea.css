@@ -15,21 +15,30 @@ border-right: 1px solid #8da7cc;
 #map1 {
 margin: 0 0 0 50% !important;
 }
-#control {
+#control button {
 position: absolute;
 z-index: 999;
-height:0px;
-width: 350px;
-bottom:0;
-margin: 0 auto;
+left:  1px;
+height:20px;
+bottom: 1px;
+background-color: transparent;
+}
+#control button:hover {
 background-color: #fff;
-border: 5px solid #8da7cc;
-border-bottom: 0;
-overflow: hidden;
 }
-#control:hover {
-height:30px;
+
+
+#map-decoration {
+z-index: 999;
+position: absolute;
+right: 1px;
+bottom: 1px;
+background-color: #fff;
+font-size:smaller;
+font-family: Arial, sans-serif;
 }
-#control input[type="text"]{
-width: 60px;
+
+
+#map1 #OpenLayers.Control.PanZoom_125.olControlPanZoom {
+display:none;
 }
