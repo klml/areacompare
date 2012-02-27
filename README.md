@@ -25,8 +25,8 @@ To compare Berlin and Paris
 ## Examples
 
 * [Bodensee and Lake Victoria](http://klml.github.com/areacompare/index.html?lat=47.6333&lon=9.36666&latc=-1&lonc=33&zoom=9) (Biggest German  [lake and biggest](http://en.wikipedia.org/wiki/List_of_lakes_by_area) African lake)
-* [Rhine-Ruhr and Tokyo](http://klml.github.com/areacompare/index.html?lat=51.34848&lon=7.01209&latc=35.73708&lonc=139.76851&zoom=10) ([Biggest German metropolitan area](http://en.wikipedia.org/wiki/Rhine-Ruhr) and [world biggest metropolitan area](http://en.wikipedia.org/wiki/Greater_Tokyo_Area))
-* [Apfeltrang and Ketterschwang](http://klml.github.com/areacompare/index.html?lat=47.83904&lon=10.59219&latc=47.96599&lonc=10.70132&zoom=16) (Biggest German metropolitan areas and world biggest metropolitan areas) (two typical kind of linear village (Straßendorf) and clustered village (Haufendorf))
+* [Rhine-Ruhr and Tokyo](http://klml.github.com/areacompare/index.html?lat=51.24329&lon=7.02857&latc=35.73463&lonc=139.76538&zoom=10) ([Biggest German metropolitan area](http://en.wikipedia.org/wiki/Rhine-Ruhr) and [world biggest metropolitan area](http://en.wikipedia.org/wiki/Greater_Tokyo_Area))
+* [Apfeltrang and Ketterschwang](http://klml.github.com/areacompare/index.html?lat=47.83904&lon=10.59219&latc=47.96599&lonc=10.70132&zoom=16) (two typical kind of linear village (Straßendorf) and clustered village (Haufendorf))
 
 ## License
 [Creative Commons BY-SA 2.0](http://creativecommons.org/licenses/by-sa/2.0/)
