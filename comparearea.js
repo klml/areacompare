@@ -18,6 +18,9 @@ var proj4326  = new OpenLayers.Projection('EPSG:4326'), projmerc  = new OpenLaye
 var startCenter = new Array();
 var touchdown = new Array();
 
+var center = new Array();
+var pos = new Array();
+
 var sync = 'resync';
 
 
@@ -33,6 +36,8 @@ jQuery(document).ready(function() {
             case 'lat1':    startlat[1] = Number(v);   break;
             case 'lon2':    startlon[1] = Number(v);   break; // http://de.wikipedia.org/wiki/Off-by-one-Error ;)
             case 'lat2':    startlat[1] = Number(v);   break;
+            case 'lonc':    startlon[1] = Number(v);   break; // c for compare 
+            case 'latc':    startlat[1] = Number(v);   break;
             case 'zoom':  zoom = parseInt(v); break;
             case 'z':     zoom = parseInt(v); break;
             case 'x':        x = parseInt(v); break;
@@ -61,6 +66,7 @@ jQuery(document).ready(function() {
         maps[n].events.register('mouseout',  n, mouseOut);
     };
     map = maps[0];
+    updatePermalink();
 });
 
 jQuery('button#sync').click( function() {
@@ -68,6 +74,7 @@ jQuery('button#sync').click( function() {
     sync = jQuery(this).html();
     jQuery(this).html(oldsync)
     jQuery('#map1 #OpenLayers.Control.PanZoom_125.olControlPanZoom').toggle();
+    jQuery('#map-decoration').toggle();
 });
 
 // geofabrik // geofabrik // geofabrik
@@ -93,7 +100,7 @@ function moveEnd() {
           , maps[this].getZoom()
         );
         moving = false;
-//        updatePermalink();
+        updatePermalink();
         movestarted = false;
         markersLayer[1-this].setVisibility(true);
         return(false);
@@ -129,9 +136,17 @@ function initMarker(n) {
     markersLayer[n].addMarker(marker[n]);
 }
 function updatePermalink() {
-    var pos = getPosition();
-    jQuery('#permalink')[0].href = '/mc/?mt0=' + layers[0].type + '&mt1=' + layers[1].type + '&lon=' + pos.lon + '&lat=' + pos.lat + '&zoom=' + pos.zoom;
-    jQuery('#customZoomLevel').html('zoom=' + maps[0].getZoom());
+    for (var n=0; n <= 1; n++) {
+        center[n] = maps[n].getCenter().clone().transform(maps[n].getProjectionObject(), proj4326);
+        pos[n] = new MapPosition(
+            Math.round(center[n].lon * 100000) / 100000,
+            Math.round(center[n].lat * 100000) / 100000,
+            maps[n].getZoom()
+        );
+    };
+
+    jQuery('#permalink')[0].href = 'index.html?lat=' + pos[0].lat + '&lon=' + pos[0].lon + '&latc=' + pos[1].lat + '&lonc=' + pos[1].lon + '&zoom=' + pos[0].zoom;
+    jQuery('#customZoomLevel').html('zoom=' + pos[0].zoom );
 }
 
 // from http://tools.geofabrik.de/js/common.js
@@ -144,6 +159,11 @@ function parseParams(handler) {
             handler(p[0], p[1]);
         }
     }
+}
+function MapPosition(lon, lat, zoom) {
+    this.lon = lon;
+    this.lat = lat;
+    this.zoom = zoom;
 }
 
 /* payload */
