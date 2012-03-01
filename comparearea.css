@@ -18,9 +18,9 @@ margin: 0 0 0 50% !important;
 #control button {
 position: absolute;
 z-index: 999;
-left:  1px;
+right:  1px;
 height:20px;
-bottom: 1px;
+top: 1px;
 background-color: transparent;
 }
 #control button:hover {
@@ -37,8 +37,13 @@ background-color: #fff;
 font-size:smaller;
 font-family: Arial, sans-serif;
 }
-
-
-#map1 #OpenLayers.Control.PanZoom_125.olControlPanZoom {
+#map1 .olControlPanZoom,
+#map1 .olControlAttribution {
 display:none;
+}
+
+
+.olControlAttribution {
+bottom: 0.5em !important;
+left: 5px ;
 }

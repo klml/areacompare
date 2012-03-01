@@ -72,12 +72,12 @@ jQuery(document).ready(function() {
 jQuery('button#sync').click( function() {
     oldsync = sync ;
     sync = jQuery(this).html();
-    jQuery(this).html(oldsync)
-    jQuery('#map1 #OpenLayers.Control.PanZoom_125.olControlPanZoom').toggle();
-    jQuery('#map-decoration').toggle();
     initMarker(0);
     initMarker(1);
     updatePermalink();
+    jQuery(this).html(oldsync);
+    jQuery('#map1 .olControlPanZoom').toggle('fast');
+    jQuery('#map-decoration').toggle();
 });
 
 // geofabrik // geofabrik // geofabrik
