@@ -28,8 +28,14 @@ jQuery(document).ready(function() {
 
     parseParams(function(param, v) {
         switch (param) {
-            case 'lon':    startlon[0] = Number(v);   break;
-            case 'lat':    startlat[0] = Number(v);   break;
+            case 'lon' :
+                startlon[0] = Number(v);
+                startlon[1] = Number(v); // if no right value is given
+            break;
+            case 'lat':
+                startlat[0] = Number(v);
+                startlat[1] = Number(v); // if no right value is given
+            break;
             case 'lon0':    startlon[0] = Number(v);   break;
             case 'lat0':    startlat[0] = Number(v);   break;
             case 'lon1':    startlon[1] = Number(v);   break;

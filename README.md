@@ -11,11 +11,13 @@ ATM no support for IE;(
 
 You can use these GET parameters (same as in www.openstreetmap.org/?lat=1.1111&lon=2.2222&zoom=6 )
 
-* lat
-* lon
-* latc
-* lonc
-* zoom 
+lat lon
+: For the left map
+
+latc lonc
+: optional for the right map, if not given both maps start with the same area. Then use the desync to rearrange the maps
+
+
 
 
 To compare Berlin and Paris
@@ -28,6 +30,12 @@ To compare Berlin and Paris
 * [Rhine-Ruhr and Tokyo](http://klml.github.com/areacompare/index.html?lat=51.24329&lon=7.02857&latc=35.73463&lonc=139.76538&zoom=10) ([Biggest German metropolitan area](http://en.wikipedia.org/wiki/Rhine-Ruhr) and [world biggest metropolitan area](http://en.wikipedia.org/wiki/Greater_Tokyo_Area))
 * [New York and Beijing](http://klml.github.com/areacompare/index.html?lat=40.70109&lon=-73.9953&latc=39.90521&lonc=116.369&zoom=12)
 * [Apfeltrang and Ketterschwang](http://klml.github.com/areacompare/index.html?lat=47.83904&lon=10.59219&latc=47.96599&lonc=10.70132&zoom=16) (two typical kind of linear village (Straßendorf) and clustered village (Haufendorf))
+
+## Similar
+
+* [areacompare.com](http://areacompare.com/) See maps of two places compared at equal scale
+
+
 
 ## License
 [Creative Commons BY-SA 2.0](http://creativecommons.org/licenses/by-sa/2.0/)
