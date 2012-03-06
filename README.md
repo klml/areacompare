@@ -12,14 +12,17 @@ ATM no support for IE;(
 You can use these GET parameters (same as in www.openstreetmap.org/?lat=1.1111&lon=2.2222&zoom=6 )
 
 For the left map
+
 * lat
 * lon
 
 Optional for the right map, if not given both maps start with the same area. Then use the desync to rearrange the maps
+
 * latc
 * lonc
 
 Optional
+
 * zoom
 
 
