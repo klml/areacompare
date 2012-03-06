@@ -1,5 +1,4 @@
 // TODO crosshair after resync
-
 // adapted from http://tools.geofabrik.de/mc/mc.js
 
 var startlon  = new Array('11.575278','16.372778');
@@ -22,7 +21,6 @@ var center = new Array();
 var pos = new Array();
 
 var sync = 'resync';
-
 
 jQuery(document).ready(function() {
 
@@ -96,6 +94,7 @@ function moveStart() {
     return(false);
 }
 function moveEnd() {
+        markersLayer[1-this].setVisibility(true);
         if (moving || sync == 'desync' ) {
             return;
         }
@@ -111,7 +110,6 @@ function moveEnd() {
         moving = false;
         updatePermalink();
         movestarted = false;
-        markersLayer[1-this].setVisibility(true);
         return(false);
 }
 

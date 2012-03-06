@@ -1,9 +1,15 @@
-With areacompare you can compare two different areas with two openstretmaps.
+With areacompare you can compare two different areas simultaneity with two openstretmaps.
 Adapted from [Map Compare](http://tools.geofabrik.de/mc/)
 
 [Demo](http://klml.github.com/areacompare/)
 
-You can use the normal OSM controls. The 'desync' button, on the right-top corner is to change one map seperatly.
+## Usage
+
+You can use the normal OSM controls. Some more features
+
+* The 'desync' button, on the right-top corner is to change one map seperatly.
+* with 'rysnc' you get the simultaneity back. To get the simultaneity zoom, just drag the desired map.
+
 
 ATM no support for IE;(
 
