@@ -28,12 +28,16 @@ jQuery(document).ready(function() {
         switch (param) {
             case 'lon' :
             case 'lon0':
+            case 'mlon' :
+            case 'mlon0':
                 startlon[0] = Number(v);
                 startlon[1] = Number(v); // if no right value is given, will be overwritten
             break;
 
             case 'lat':
             case 'lat0':
+            case 'mlat':
+            case 'mlat0':
                 startlat[0] = Number(v);
                 startlat[1] = Number(v); // if no right value is given, will be overwritten
             break;
@@ -41,10 +45,16 @@ jQuery(document).ready(function() {
             case 'lon1':
             case 'lon2':
             case 'lonc': // c for compare 
+            case 'mlon1': // using an marker osm link
+            case 'mlon2':
+            case 'mlonc':
                 startlon[1] = Number(v);   break;
             case 'lat1':
             case 'lat2':
             case 'latc':
+            case 'mlat1':
+            case 'mlat2':
+            case 'mlatc':
                 startlat[1] = Number(v);   break;
 
             case 'zoom':  zoom = parseInt(v); break;
