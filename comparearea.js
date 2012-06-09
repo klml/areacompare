@@ -27,21 +27,26 @@ jQuery(document).ready(function() {
     parseParams(function(param, v) {
         switch (param) {
             case 'lon' :
+            case 'lon0':
                 startlon[0] = Number(v);
-                startlon[1] = Number(v); // if no right value is given
+                startlon[1] = Number(v); // if no right value is given, will be overwritten
             break;
+
             case 'lat':
+            case 'lat0':
                 startlat[0] = Number(v);
-                startlat[1] = Number(v); // if no right value is given
+                startlat[1] = Number(v); // if no right value is given, will be overwritten
             break;
-            case 'lon0':    startlon[0] = Number(v);   break;
-            case 'lat0':    startlat[0] = Number(v);   break;
-            case 'lon1':    startlon[1] = Number(v);   break;
-            case 'lat1':    startlat[1] = Number(v);   break;
-            case 'lon2':    startlon[1] = Number(v);   break; // http://de.wikipedia.org/wiki/Off-by-one-Error ;)
-            case 'lat2':    startlat[1] = Number(v);   break;
-            case 'lonc':    startlon[1] = Number(v);   break; // c for compare 
-            case 'latc':    startlat[1] = Number(v);   break;
+
+            case 'lon1':
+            case 'lon2':
+            case 'lonc': // c for compare 
+                startlon[1] = Number(v);   break;
+            case 'lat1':
+            case 'lat2':
+            case 'latc':
+                startlat[1] = Number(v);   break;
+
             case 'zoom':  zoom = parseInt(v); break;
             case 'z':     zoom = parseInt(v); break;
             case 'x':        x = parseInt(v); break;
