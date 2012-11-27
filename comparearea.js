@@ -21,48 +21,12 @@ var center = new Array();
 var pos = new Array();
 
 var sync = 'resync';
+var newhash = '';
+
 
 jQuery(document).ready(function() {
 
-    parseParams(function(param, v) {
-        switch (param) {
-            case 'lon' :
-            case 'lon0':
-            case 'mlon' :
-            case 'mlon0':
-                startlon[0] = Number(v);
-                startlon[1] = Number(v); // if no right value is given, will be overwritten
-            break;
-
-            case 'lat':
-            case 'lat0':
-            case 'mlat':
-            case 'mlat0':
-                startlat[0] = Number(v);
-                startlat[1] = Number(v); // if no right value is given, will be overwritten
-            break;
-
-            case 'lon1':
-            case 'lon2':
-            case 'lonc': // c for compare 
-            case 'mlon1': // using an marker osm link
-            case 'mlon2':
-            case 'mlonc':
-                startlon[1] = Number(v);   break;
-            case 'lat1':
-            case 'lat2':
-            case 'latc':
-            case 'mlat1':
-            case 'mlat2':
-            case 'mlatc':
-                startlat[1] = Number(v);   break;
-
-            case 'zoom':  zoom = parseInt(v); break;
-            case 'z':     zoom = parseInt(v); break;
-            case 'x':        x = parseInt(v); break;
-            case 'y':        y = parseInt(v); break;
-        }
-    });
+    parseParams();
 
     for (var n=0; n <= 1; n++) {
 
@@ -75,6 +39,7 @@ jQuery(document).ready(function() {
             new OpenLayers.Projection("EPSG:900913") // to Spherical Mercator Projection
             ), zoom
         );
+
 //~ //      newLayer(n, mt[n]);
 //~ //        setStartPos(n, pos.getLonLat(), pos.zoom);
         initMarker(n);
@@ -84,8 +49,23 @@ jQuery(document).ready(function() {
         maps[n].events.register('mouseover', n, mouseOver);
         maps[n].events.register('mouseout',  n, mouseOut);
     };
-    map = maps[0];
-    updatePermalink();
+
+
+    $(window).bind('hashchange', function() {
+        if( this.location.hash.slice('1') == newhash ) return ; // prevent trigger from updateHash
+        parseParams();
+
+        for (var n=0; n <= 1; n++) { // only works changing zoom
+            //console.log( 'params ' + startlon[0] +  ' ' + startlat[0] + ' - ' + startlon[1] + ' ' + startlat[1]);
+            console.log( n + ' ' + startlon[n] +  ' ' + startlat[n] );
+            maps[n].setCenter(new OpenLayers.LonLat(startlon[n],startlat[n])  // TODO FIX this
+                .transform(
+                new OpenLayers.Projection("EPSG:4326"),
+                new OpenLayers.Projection("EPSG:900913")
+                ), zoom
+            );
+        };
+    });
 });
 
 jQuery('button#sync').click( function() {
@@ -93,10 +73,9 @@ jQuery('button#sync').click( function() {
     sync = jQuery(this).html();
     initMarker(0);
     initMarker(1);
-    updatePermalink();
+    updateHash();
     jQuery(this).html(oldsync);
     jQuery('#map1 .olControlPanZoom').toggle('fast');
-    jQuery('#map-decoration').toggle();
 });
 
 // geofabrik // geofabrik // geofabrik
@@ -110,7 +89,11 @@ function moveStart() {
 }
 function moveEnd() {
         markersLayer[1-this].setVisibility(true);
-        if (moving || sync == 'desync' ) {
+        if (sync == 'desync' ) {
+            window.location.hash = ''; // useless, no shared zoom
+            return;
+        }
+        if (moving) {
             return;
         }
         moving = true;
@@ -123,8 +106,8 @@ function moveEnd() {
           , maps[this].getZoom()
         );
         moving = false;
-        updatePermalink();
         movestarted = false;
+        updateHash();
         return(false);
 }
 
@@ -157,7 +140,7 @@ function initMarker(n) {
     markersLayer[n].setVisibility(false);
     markersLayer[n].addMarker(marker[n]);
 }
-function updatePermalink() {
+function updateHash() {
     for (var n=0; n <= 1; n++) {
         center[n] = maps[n].getCenter().clone().transform(maps[n].getProjectionObject(), proj4326);
         pos[n] = new MapPosition(
@@ -166,20 +149,56 @@ function updatePermalink() {
             maps[n].getZoom()
         );
     };
-
-    jQuery('#permalink')[0].href = 'index.html?lat=' + pos[0].lat + '&lon=' + pos[0].lon + '&latc=' + pos[1].lat + '&lonc=' + pos[1].lon + '&zoom=' + pos[0].zoom;
-    jQuery('#customZoomLevel').html('zoom=' + pos[0].zoom );
+    newhash = 'lat=' + pos[0].lat + '&lon=' + pos[0].lon + '&latc=' + pos[1].lat + '&lonc=' + pos[1].lon + '&zoom=' + pos[0].zoom ;
+    window.location.hash = newhash ;
 }
-
-// from http://tools.geofabrik.de/js/common.js
-function parseParams(handler) {
-    var perma = location.search.substr(1);
-    if (perma != '') {
-        paras = perma.split('&');
+function parseParams() {
+    var hash = window.location.hash; // TODO backwards compability
+    if (hash != '') {
+        paras = hash.slice('1').split('&') ;
         for (var i = 0; i < paras.length; i++) {
             var p = paras[i].split('=');
-            handler(p[0], p[1]);
+            startCoor(p[0], p[1]);
         }
+    }
+}
+function startCoor(param, v) {
+    switch (param) {
+        case 'lon' :
+        case 'lon0':
+        case 'mlon' :
+        case 'mlon0':
+            startlon[0] = Number(v);
+            startlon[1] = Number(v); // if no right value is given, will be overwritten
+        break;
+
+        case 'lat':
+        case 'lat0':
+        case 'mlat':
+        case 'mlat0':
+            startlat[0] = Number(v);
+            startlat[1] = Number(v); // if no right value is given, will be overwritten
+        break;
+
+        case 'lon1':
+        case 'lon2':
+        case 'lonc': // c for compare 
+        case 'mlon1': // using an marker osm link
+        case 'mlon2':
+        case 'mlonc':
+            startlon[1] = Number(v);   break;
+        case 'lat1':
+        case 'lat2':
+        case 'latc':
+        case 'mlat1':
+        case 'mlat2':
+        case 'mlatc':
+            startlat[1] = Number(v);   break;
+
+        case 'zoom':  zoom = parseInt(v); break;
+        case 'z':     zoom = parseInt(v); break;
+        case 'x':        x = parseInt(v); break;
+        case 'y':        y = parseInt(v); break;
     }
 }
 function MapPosition(lon, lat, zoom) {
@@ -187,6 +206,5 @@ function MapPosition(lon, lat, zoom) {
     this.lat = lat;
     this.zoom = zoom;
 }
-
 /* payload */
 var crosshairs ='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAAZiS0dEAMQAxADE73nNUQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9kBHBEbBoP7gTgAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAdUlEQVQ4y81UQQ7AIAijy/7/5e6wuBBGUBSz9WpTSy2CpDQAEAtqws2BOnvxDxkAAPcyD0OCGSwJeq7LHZ6rAtbl3gy9GqQds0LFZhh1jORTZpLsccsz3DIyojroMfX46U2ZNR5mOCP6r8+hZJd7MXzjMPM4FyigMiYeY2efAAAAAElFTkSuQmCC'
