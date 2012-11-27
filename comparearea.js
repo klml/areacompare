@@ -57,7 +57,7 @@ jQuery(document).ready(function() {
 
         for (var n=0; n <= 1; n++) { // only works changing zoom
             //console.log( 'params ' + startlon[0] +  ' ' + startlat[0] + ' - ' + startlon[1] + ' ' + startlat[1]);
-            console.log( n + ' ' + startlon[n] +  ' ' + startlat[n] );
+            //console.log( n + ' ' + startlon[n] +  ' ' + startlat[n] );
             maps[n].setCenter(new OpenLayers.LonLat(startlon[n],startlat[n])  // TODO FIX this
                 .transform(
                 new OpenLayers.Projection("EPSG:4326"),
