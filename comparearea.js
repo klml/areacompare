@@ -52,7 +52,7 @@ jQuery(document).ready(function() {
 
 
     $(window).bind('hashchange', function() {
-        if( this.location.hash.slice('1') == newhash ) return ; // prevent trigger from updateHash
+        if( this.location.hash.slice('1') == newhash || this.location.hash == '' ) return ; // prevent trigger from updateHash
         parseParams();
 
         for (var n=0; n <= 1; n++) { // only works changing zoom
