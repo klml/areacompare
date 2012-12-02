@@ -33,13 +33,8 @@ jQuery(document).ready(function() {
         maps[n] = new OpenLayers.Map('map' + n);
         var mapnik = new OpenLayers.Layer.OSM();
         maps[n].addLayer(mapnik);
-        maps[n].setCenter(new OpenLayers.LonLat(startlon[n],startlat[n]) // Center of the map
-            .transform(
-            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-            new OpenLayers.Projection("EPSG:900913") // to Spherical Mercator Projection
-            ), zoom
-        );
-
+        
+        wgs1984centermap(n);
 //~ //      newLayer(n, mt[n]);
 //~ //        setStartPos(n, pos.getLonLat(), pos.zoom);
         initMarker(n);
@@ -52,21 +47,27 @@ jQuery(document).ready(function() {
 
 
     $(window).bind('hashchange', function() {
-        if( this.location.hash.slice('1') == newhash || this.location.hash == '' ) return ; // prevent trigger from updateHash
+        if( this.location.hash.slice('1') == newhash || this.location.hash == '' ) return ; // prevent trigger from updateHash 
         parseParams();
 
-        for (var n=0; n <= 1; n++) { // only works changing zoom
+        //for (var n=0; n <= 1; n++) { // only works changing zoom
             //console.log( 'params ' + startlon[0] +  ' ' + startlat[0] + ' - ' + startlon[1] + ' ' + startlat[1]);
             //console.log( n + ' ' + startlon[n] +  ' ' + startlat[n] );
-            maps[n].setCenter(new OpenLayers.LonLat(startlon[n],startlat[n])  // TODO FIX this
-                .transform(
-                new OpenLayers.Projection("EPSG:4326"),
-                new OpenLayers.Projection("EPSG:900913")
-                ), zoom
-            );
-        };
+            wgs1984centermap(0);
+            wgs1984centermap(1);
+        //};
     });
 });
+
+function wgs1984centermap(n) {
+        maps[n].setCenter(new OpenLayers.LonLat(startlon[n],startlat[n]) // Center of the map
+            .transform(
+            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+            new OpenLayers.Projection("EPSG:900913") // to Spherical Mercator Projection
+            ), zoom
+        );
+};
+
 
 jQuery('button#sync').click( function() {
     oldsync = sync ;
@@ -100,7 +101,7 @@ function moveEnd() {
 
         touchdown['lon'] = maps[this].getCenter().lon - startCenter['lon'] + maps[1-this].getCenter().lon,
         touchdown['lat'] = maps[this].getCenter().lat - startCenter['lat'] + maps[1-this].getCenter().lat
-        
+
         maps[1-this].setCenter(
             new OpenLayers.LonLat(touchdown['lon'],touchdown['lat']) // Center of the map
           , maps[this].getZoom()
