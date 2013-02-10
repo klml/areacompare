@@ -12,6 +12,7 @@ var markersLayer = new Array();
 var marker = new Array();
 var moving = false;
 var movestarted = false;
+var hashing = false;
 var proj4326  = new OpenLayers.Projection('EPSG:4326'), projmerc  = new OpenLayers.Projection('EPSG:900913');
 
 var startCenter = new Array();
@@ -21,6 +22,7 @@ var center = new Array();
 var pos = new Array();
 
 var sync = 'resync';
+
 var newhash = '';
 
 
@@ -47,15 +49,15 @@ jQuery(document).ready(function() {
 
 
     $(window).bind('hashchange', function() {
-        if( this.location.hash.slice('1') == newhash || this.location.hash == '' ) return ; // prevent trigger from updateHash 
+        if( this.location.hash.slice('1') == newhash || this.location.hash == '' || hashing == true ) return ; // prevent trigger from updateHash 
         parseParams();
-
-        //for (var n=0; n <= 1; n++) { // only works changing zoom
-            //console.log( 'params ' + startlon[0] +  ' ' + startlat[0] + ' - ' + startlon[1] + ' ' + startlat[1]);
-            //console.log( n + ' ' + startlon[n] +  ' ' + startlat[n] );
-            wgs1984centermap(0);
-            wgs1984centermap(1);
-        //};
+        hashing = true ; // avoid change trigger
+console.log(hashing);
+        wgs1984centermap(0);
+        wgs1984centermap(1);
+console.log(hashing);
+        hashing = false ;
+console.log(hashing);
     });
 });
 
