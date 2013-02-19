@@ -52,12 +52,12 @@ jQuery(document).ready(function() {
         if( this.location.hash.slice('1') == newhash || this.location.hash == '' || hashing == true ) return ; // prevent trigger from updateHash 
         parseParams();
         hashing = true ; // avoid change trigger
-console.log(hashing);
+
         wgs1984centermap(0);
         wgs1984centermap(1);
-console.log(hashing);
+
         hashing = false ;
-console.log(hashing);
+
     });
 });
 
