@@ -44,8 +44,8 @@ To compare Berlin and Paris
 
 ## Similar
 
-* [areacompare.com](http://areacompare.com/) See maps of two places compared at equal scale
-
+* [areacompare.com](http://areacompare.com) See maps of two places compared at equal scale
+* [thetruesize.com](https://thetruesize.com)
 
 
 ## License
