@@ -1,4 +1,4 @@
-With areacompare you can compare two different areas simultaneity with two openstretmaps.
+With areacompare you can compare two different areas simultaneity with two openstreetmaps.
 Adapted from [Map Compare](http://tools.geofabrik.de/mc/)
 
 [Demo](http://klml.github.com/areacompare/)
