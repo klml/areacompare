@@ -21,7 +21,9 @@ The parameters are seperated by ```/``` (same as in www.openstreetmap.org/#map=1
 To compare Berlin and Paris
 
 > [#11  /52.51639/13.37777/48.86102 /2.33585](//klml.github.com/areacompare/#11/52.51639/13.37777/48.86102/2.33585)
+
 > #zoom /lat left/lon left/lat right/lon right
+
 
 ## Examples
 
