@@ -1,7 +1,7 @@
 With areacompare you can compare two different areas simultaneity with two openstreetmaps.
-Adapted from [Map Compare](http://tools.geofabrik.de/mc/)
+Adapted from [Map Compare](//tools.geofabrik.de/mc/)
 
-[Demo](http://klml.github.com/areacompare/)
+[Demo](//klml.github.com/areacompare/)
 
 ## Usage
 
@@ -15,32 +15,23 @@ ATM no support for IE;(
 
 ## Links
 
-You can use these GET parameters (same as in www.openstreetmap.org/?lat=1.1111&lon=2.2222&zoom=6 )
+Control areacompare with hashttag (```#```).
+The parameters are seperated by ```/``` (same as in www.openstreetmap.org/#map=15/48.137222/11.575278 )
 
-For the left map
+  #15   /48.13948/13.57772/48.19584 /11.52374
+  #zoom /lat left/lon left/lat right/lon right
 
-* lat
-* lon
-
-Optional for the right map, if not given both maps start with the same area. Then use the desync to rearrange the maps
-
-* latc
-* lonc
-
-Optional
-
-* zoom
 
 To compare Berlin and Paris
 
-> [#lat=52.51639&lon=13.37777&latc=48.86102&lonc=2.33585&zoom=11](http://klml.github.com/areacompare/index.html#lat=52.51639&lon=13.37777&lat1=48.86102&lon1=2.33585&zoom=12)
+> [#11/52.51639/13.37777/48.86102/2.33585](//klml.github.com/areacompare/index.html#11/52.51639/13.37777/48.86102/2.33585)
 
 ## Examples
 
-* [Bodensee and Lake Victoria](http://klml.github.com/areacompare/index.html#lat=47.6333&lon=9.36666&latc=-1&lonc=33&zoom=9) (Biggest German  [lake and biggest](http://en.wikipedia.org/wiki/List_of_lakes_by_area) African lake)
-* [Rhine-Ruhr and Tokyo](http://klml.github.com/areacompare/index.html#lat=51.24329&lon=7.02857&latc=35.73463&lonc=139.76538&zoom=10) ([Biggest German metropolitan area](http://en.wikipedia.org/wiki/Rhine-Ruhr) and [world biggest metropolitan area](http://en.wikipedia.org/wiki/Greater_Tokyo_Area))
-* [New York and Beijing](http://klml.github.com/areacompare/index.html#lat=40.70109&lon=-73.9953&latc=39.90521&lonc=116.369&zoom=12)
-* [Apfeltrang and Ketterschwang](http://klml.github.com/areacompare/index.html#lat=47.83904&lon=10.59219&latc=47.96599&lonc=10.70132&zoom=16) (two typical kind of linear village (Straßendorf) and clustered village (Haufendorf))
+* [Bodensee and Lake Victoria](https://klml.github.com/areacompare/index.html#9/47.6333/9.36666/-1/33) (Biggest German  [lake and biggest](https://en.wikipedia.org/wiki/List_of_lakes_by_area) African lake)
+* [Rhine-Ruhr and Tokyo](https://klml.github.com/areacompare/index.html#10/51.24329/7.02857/35.73463/139.76538) ([Biggest German metropolitan area](https://en.wikipedia.org/wiki/Rhine-Ruhr) and [world biggest metropolitan area](https://en.wikipedia.org/wiki/Greater_Tokyo_Area))
+* [New York and Beijing](https://klml.github.com/areacompare/index.html#12/40.70109/-73.9953/39.90521/116.369)
+* [Apfeltrang and Ketterschwang](https://klml.github.com/areacompare/index.html#16/47.83904/10.59219/47.96599/10.70132) (two typical kind of linear village (Straßendorf) and clustered village (Haufendorf))
 
 ## Similar
 

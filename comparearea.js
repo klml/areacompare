@@ -152,56 +152,21 @@ function updateHash() {
             maps[n].getZoom()
         );
     };
-    newhash = 'lat=' + pos[0].lat + '&lon=' + pos[0].lon + '&latc=' + pos[1].lat + '&lonc=' + pos[1].lon + '&zoom=' + pos[0].zoom ;
+
+    // use hash seperator "/" from openstreetmap.org
+    // https://www.openstreetmap.org/#map=15/48.137222/11.575278
+    newhash = pos[0].zoom + '/' + pos[0].lat + '/' + pos[0].lon + '/' + pos[1].lat + '/' + pos[1].lon ;
     window.location.hash = newhash ;
 }
 function parseParams() {
     var hash = window.location.hash; // TODO backwards compability
     if (hash != '') {
-        paras = hash.slice('1').split('&') ;
-        for (var i = 0; i < paras.length; i++) {
-            var p = paras[i].split('=');
-            startCoor(p[0], p[1]);
-        }
-    }
-}
-function startCoor(param, v) {
-    switch (param) {
-        case 'lon' :
-        case 'lon0':
-        case 'mlon' :
-        case 'mlon0':
-            startlon[0] = Number(v);
-            startlon[1] = Number(v); // if no right value is given, will be overwritten
-        break;
-
-        case 'lat':
-        case 'lat0':
-        case 'mlat':
-        case 'mlat0':
-            startlat[0] = Number(v);
-            startlat[1] = Number(v); // if no right value is given, will be overwritten
-        break;
-
-        case 'lon1':
-        case 'lon2':
-        case 'lonc': // c for compare 
-        case 'mlon1': // using an marker osm link
-        case 'mlon2':
-        case 'mlonc':
-            startlon[1] = Number(v);   break;
-        case 'lat1':
-        case 'lat2':
-        case 'latc':
-        case 'mlat1':
-        case 'mlat2':
-        case 'mlatc':
-            startlat[1] = Number(v);   break;
-
-        case 'zoom':  zoom = parseInt(v); break;
-        case 'z':     zoom = parseInt(v); break;
-        case 'x':        x = parseInt(v); break;
-        case 'y':        y = parseInt(v); break;
+        paras = hash.slice('1').split('/') ;
+        zoom        = paras[0]
+        startlat[0] = paras[1]
+        startlon[0] = paras[2]
+        startlat[1] = paras[3]
+        startlon[1] = paras[4]
     }
 }
 function MapPosition(lon, lat, zoom) {
