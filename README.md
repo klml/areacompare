@@ -34,9 +34,8 @@ To compare Berlin and Paris
 
 ## Similar
 
-* [areacompare.com](http://areacompare.com) See maps of two places compared at equal scale
 * [thetruesize.com](https://thetruesize.com)
-* [mvexel.github.io/thenandnow/](https://mvexel.github.io/thenandnow/) compares osm of today to the one from 2007
+
 
 ## License
 [Creative Commons BY-SA 2.0](http://creativecommons.org/licenses/by-sa/2.0/)
