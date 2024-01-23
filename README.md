@@ -34,6 +34,7 @@ To compare Berlin and Paris
 
 ## Similar
 
+* [mapfight.xyz](https://mapfight.xyz)
 * [thetruesize.com](https://thetruesize.com)
 
 
