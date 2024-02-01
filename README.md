@@ -10,9 +10,6 @@ You can use the normal OSM controls. Some more features
 * The 'desync' button, on the right-top corner is to change one map seperatly.
 * with 'rysnc' you get the simultaneity back. To get the simultaneity zoom, just drag the desired map.
 
-
-ATM no support for IE;(
-
 ## Links
 
 Control areacompare with hashttag (```#```).
